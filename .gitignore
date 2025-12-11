@@ -1,0 +1,32 @@
+# Build artifacts
+build/
+bin/
+obj/
+out/
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Visual Studio Code
+.vscode/
+
+# Windows junk
+Thumbs.db
+Desktop.ini
+
+# Compiled binaries
+*.exe
+*.dll
+*.lib
+*.pdb
+
+# Temporary files
+*.tmp
+*.log
+
+# Backup files
+*~
+*.bak

@@ -1,3 +1,8 @@
+// utils.cpp
+// Implements the utility functions declared in utils.hpp. This includes
+// board display, input handling, move validation, and win-condition logic
+// used by the main Tic-Tac-Toe game loop.
+
 #include "utils.hpp"
 #include <iostream>
 #include <cstdlib>

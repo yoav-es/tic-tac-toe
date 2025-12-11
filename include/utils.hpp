@@ -1,3 +1,8 @@
+// utils.hpp
+// Declares utility functions for the Tic-Tac-Toe game, including board
+// rendering, move validation, win checking, and player configuration.
+// Also provides small inline helpers for row, column, and diagonal checks.
+
 #ifndef UTILS_HPP
 #define UTILS_HPP
 

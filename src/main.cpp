@@ -1,3 +1,8 @@
+// main.cpp
+// Contains the main game loop for Tic-Tac-Toe. Handles turn order,
+// score tracking, repeated play, and interaction with the utility
+// functions that manage board state and win detection.
+
 #include <iostream>
 #include <vector>
 #include <cstdlib>
