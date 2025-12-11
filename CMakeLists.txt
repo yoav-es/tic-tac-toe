@@ -13,7 +13,15 @@ project(TicTacToe
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Include header files
-include_directories(include)
+# Create the executable
+add_executable(tictactoe
+    main.cpp
+    utils.cpp
+)
 
-
+# Add warnings
+if (MSVC)
+    target_compile_options(tictactoe PRIVATE /W4)
+else()
+    target_compile_options(tictactoe PRIVATE -Wall -Wextra -Wpedantic)
+endif()
