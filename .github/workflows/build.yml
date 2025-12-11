@@ -3,6 +3,8 @@
 # Windows, and macOS using a matrix strategy to ensure cross-platform
 # compatibility.name: Build C++ Project
 
+name: Build C++ Project
+
 on:
   push:
   pull_request:
@@ -18,19 +20,35 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # -------------------------
+      # Linux dependencies
+      # -------------------------
       - name: Install dependencies (Linux)
         if: matrix.os == 'ubuntu-latest'
-        run: sudo apt-get update && sudo apt-get install -y g++
+        run: sudo apt-get update && sudo apt-get install -y g++ cmake
 
-      - name: Build (Linux)
-        if: matrix.os == 'ubuntu-latest'
-        run: g++ -std=c++17 src/*.cpp -I include -o tic_tac_toe
-
-      - name: Build (Windows)
-        if: matrix.os == 'windows-latest'
-        run: |
-          cl /EHsc /std:c++17 src\*.cpp /I include /Fe:tic_tac_toe.exe
-
-      - name: Build (macOS)
+      # -------------------------
+      # macOS dependencies
+      # -------------------------
+      - name: Install dependencies (macOS)
         if: matrix.os == 'macos-latest'
-        run: clang++ -std=c++17 src/*.cpp -I include -o tic_tac_toe
+        run: brew install cmake
+
+      # -------------------------
+      # Windows dependencies
+      # -------------------------
+      - name: Install dependencies (Windows)
+        if: matrix.os == 'windows-latest'
+        run: choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System' --yes
+
+      # -------------------------
+      # Configure with CMake
+      # -------------------------
+      - name: Configure project
+        run: cmake -S . -B build
+
+      # -------------------------
+      # Build with CMake
+      # -------------------------
+      - name: Build project
+        run: cmake --build build --config Release
