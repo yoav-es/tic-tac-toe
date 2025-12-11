@@ -16,10 +16,4 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Include header files
 include_directories(include)
 
-# Source files
-add_executable(tictactoe
-    src/main.cpp
-    src/utils.cpp
-)
 
-CMD ["./build/tictactoe"]
