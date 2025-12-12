@@ -35,13 +35,11 @@ TicTacToe/
 ---
 ## Downloads
 
-Precompiled binaries are automatically built and published for each release using
-[GitHub Actions](.github/workflows/release.yml).
+Grab the latest precompiled binaries here:
 
-You can find them on the [Releases page](../../releases) under **Assets**:
-- `tictactoe-windows.exe` – Windows executable
-- `tictactoe-linux` – Linux binary
-- `tictactoe-macos` – macOS binary
+- [Windows](https://github.com/yoav-es/tic-tac-toe/releases/latest/download/tictactoe-windows.exe)
+- [Linux](https://github.com/yoav-es/tic-tac-toe/releases/latest/download/tictactoe-linux)
+- [macOS](https://github.com/yoav-es/tic-tac-toe/releases/latest/download/tictactoe-macos)
 
 ---
 

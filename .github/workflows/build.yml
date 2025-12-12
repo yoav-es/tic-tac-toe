@@ -3,13 +3,10 @@
 # Windows, and macOS using a matrix strategy to ensure cross-platform
 # compatibility.name: Build C++ Project
 
-name: Build C++ Project
+name: Build
 
 on:
-  push:
-  pull_request:
   workflow_call:
-
 
 jobs:
   build:
@@ -19,57 +16,32 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      # -------------------------
-      # Linux dependencies
-      # -------------------------
-      - name: Install dependencies (Linux)
-        if: matrix.os == 'ubuntu-latest'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y g++ cmake
+      - name: Configure CMake
+        run: cmake -B build -S . -DCMAKE_BUILD_TYPE=Release
 
-      # -------------------------
-      # macOS dependencies
-      # -------------------------
-      - name: Install dependencies (macOS)
-        if: matrix.os == 'macos-latest'
-        run: |
-          brew update
-          brew install cmake llvm
-          echo "CC=/opt/homebrew/opt/llvm/bin/clang" >> $GITHUB_ENV
-          echo "CXX=/opt/homebrew/opt/llvm/bin/clang++" >> $GITHUB_ENV
-
-      # -------------------------
-      # Windows dependencies
-      # -------------------------
-      - name: Install dependencies (Windows)
-        if: matrix.os == 'windows-latest'
-        run: |
-          choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System' --yes
-
-      # -------------------------
-      # Configure with CMake
-      # -------------------------
-      - name: Configure project
-        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
-
-      # -------------------------
-      # Build with CMake
-      # -------------------------
-      - name: Build project
+      - name: Build
         run: cmake --build build --config Release
 
-      # -------------------------
-      # Upload build artifacts
-      # -------------------------
-      - name: Upload executable
+      - name: Upload executable (Linux)
+        if: matrix.os == 'ubuntu-latest'
         uses: actions/upload-artifact@v4
         with:
-          name: tictactoe-${{ matrix.os }}
-          path: |
-            build/Release/tictactoe.exe
-            build/tictactoe
-          if-no-files-found: ignore
+          name: tictactoe-ubuntu-latest
+          path: build/tictactoe
+
+      - name: Upload executable (macOS)
+        if: matrix.os == 'macos-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: tictactoe-macos-latest
+          path: build/tictactoe
+
+      - name: Upload executable (Windows)
+        if: matrix.os == 'windows-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: tictactoe-windows-latest
+          path: build/Release/tictactoe.exe
