@@ -25,6 +25,7 @@ jobs:
       - name: Build
         run: cmake --build build --config Release
 
+      # Linux
       - name: Upload executable (Linux)
         if: matrix.os == 'ubuntu-latest'
         uses: actions/upload-artifact@v4
@@ -32,6 +33,7 @@ jobs:
           name: tictactoe-ubuntu-latest
           path: build/tictactoe
 
+      # macOS
       - name: Upload executable (macOS)
         if: matrix.os == 'macos-latest'
         uses: actions/upload-artifact@v4
@@ -39,6 +41,7 @@ jobs:
           name: tictactoe-macos-latest
           path: build/tictactoe
 
+      # Windows
       - name: Upload executable (Windows)
         if: matrix.os == 'windows-latest'
         uses: actions/upload-artifact@v4
