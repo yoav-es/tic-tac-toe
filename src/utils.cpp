@@ -6,10 +6,11 @@
 #include "utils.hpp"
 #include <iostream>
 #include <cstdlib>
-
+#include <limits>
 using std::cout;
 using std::cin;
 using std::vector;
+
 
 /**
  * @copydoc ShowBoard()
@@ -20,7 +21,19 @@ void ShowBoard(const vector<vector<char>>& board) {
   for (int row = 0; row < 3; ++row) {
     cout << row << "| ";
     for (int col = 0; col < 3; ++col) {
-      cout << board[row][col] << ' ';
+      char c = board[row][col];
+      if (c == 'x')
+      {
+        cout << "\033[31m" << 'x' << "\033[0m ";
+      }
+      else if (c == 'o')
+      {
+        cout << "\033[34m" << 'o' << "\033[0m ";
+      }
+      else
+      {
+        cout << ". ";
+      }
     }
     cout << '\n';
   }
@@ -64,7 +77,7 @@ bool CheckCell(int row, int col, char sign,
 bool ReadMove(int& row, int& col) {
   if (!(cin >> row >> col)) {
     cin.clear();
-    cin.ignore(1000, '\n');
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     cout << "Invalid input. Enter two numbers.\n";
     return false;
   }

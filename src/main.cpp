@@ -13,6 +13,14 @@ using std::cout;
 using std::cin;
 using std::vector;
 
+void ClearScreen() {
+  #ifdef _WIN32
+      system("cls");
+  #else
+      system("clear");
+  #endif
+  }
+
 /**
  * @brief Runs one full game of Tic-Tac-Toe.
  *
@@ -29,7 +37,6 @@ char PlayGame(char player, vector<vector<char>>& board) {
 
   while (move_count < 9) {
     ShowBoard(board);
-
     cout << "Current player: " << player << "\n";
     cout << "Enter row and column (0-2 0-2): ";
 
@@ -46,7 +53,7 @@ char PlayGame(char player, vector<vector<char>>& board) {
         ShowBoard(board);
         return player;
       }
-
+      ClearScreen();   
       player = (player == 'x') ? 'o' : 'x';
     }
   }
@@ -75,7 +82,7 @@ int main() {
     char current = PlayerConfig();
     cout << "\nStarting player: " << current << "\n";
 
-    char result = PlayGame(current, board);
+    const char result = PlayGame(current, board);
 
     if (result == 'x') {
       ++score_x;
