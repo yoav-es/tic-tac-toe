@@ -18,7 +18,15 @@ jobs:
         with:
           path: artifacts
 
+      # Rename executables for cleaner release asset names
+      - name: Rename executables
+        run: |
+          mkdir renamed
+          cp artifacts/tictactoe-ubuntu-latest/tictactoe renamed/tictactoe-linux
+          cp artifacts/tictactoe-macos-latest/tictactoe renamed/tictactoe-macos
+          cp artifacts/tictactoe-windows-latest/tictactoe.exe renamed/tictactoe-windows.exe
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: artifacts/**/*
+          files: renamed/*

@@ -33,6 +33,17 @@ TicTacToe/
 - **Starting player:** Randomized selection between X and O.
 
 ---
+## Downloads
+
+Precompiled binaries are automatically built and published for each release using
+[GitHub Actions](.github/workflows/release.yml).
+
+You can find them on the [Releases page](../../releases) under **Assets**:
+- `tictactoe-windows.exe` – Windows executable
+- `tictactoe-linux` – Linux binary
+- `tictactoe-macos` – macOS binary
+
+---
 
 ## Using g++
   Direct compilation without CMake:
@@ -66,6 +77,7 @@ TicTacToe/
   ```
     docker run -it tictactoe
   ```
+
 ---
 
 ## GitHub Actions
